@@ -1,19 +1,19 @@
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 
-export default function SpotifyLoginScreen() {
+export default function SignupScreen() {
   const navigation = useNavigation();
-
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   return (
     <LinearGradient
-      colors={['#1a1a1a', '#000000']}
+      colors={['#1a1a1a', '#000000']} // ✅ lighter → darker fade
       start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
+      end={{ x: 0, y: 1 }} // vertical gradient
       style={styles.container}
     >
       {/* Logo */}
@@ -22,8 +22,16 @@ export default function SpotifyLoginScreen() {
         style={styles.logo} 
       />
 
-      {/* Title */}
-      <Text style={styles.title}>Spotify</Text>
+      <Text style={styles.title}>Create Account</Text>
+
+      {/* Email */}
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        placeholderTextColor="#666"
+        value={email}
+        onChangeText={setEmail}
+      />
 
       {/* Username */}
       <TextInput
@@ -44,41 +52,19 @@ export default function SpotifyLoginScreen() {
         onChangeText={setPassword}
       />
 
-      {/* Forgot password */}
-      <TouchableOpacity style={styles.forgotWrapper}>
-        <Text style={styles.forgotText}>Forgot password?</Text>
+      {/* Sign Up button */}
+      <TouchableOpacity style={styles.signUpButton}>
+        <Text style={styles.signUpText}>Sign Up</Text>
       </TouchableOpacity>
 
-      {/* Sign In button */}
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.signInText}>Sign In</Text>
-      </TouchableOpacity>
-
-      {/* Social login */}
-      <Text style={styles.socialText}>Be Correct With</Text>
-      <View style={styles.socialContainer}>
-        <TouchableOpacity>
-          <Image 
-            source={require('@/assets/images/fblogo.jpg')} 
-            style={styles.socialIcon} 
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image 
-            source={require('@/assets/images/googlelogo2.jpg')} 
-            style={styles.socialIcon} 
-          />
-        </TouchableOpacity>
-      </View>
-
-      {/* Go to Sign Up */}
-      <Text style={styles.signupText}>
-        Don’t have an account?{' '}
+      {/* Back to login */}
+      <Text style={styles.loginText}>
+        Already have an account?{' '}
         <Text 
-          style={styles.signupLink} 
-          onPress={() => navigation.navigate('signup')}
+          style={styles.loginLink} 
+          onPress={() => navigation.navigate('explore')}
         >
-          Sign Up
+          Log In
         </Text>
       </Text>
     </LinearGradient>
@@ -99,7 +85,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     color: '#fff',
     fontWeight: 'bold',
     marginBottom: 40,
@@ -114,16 +100,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 15,
   },
-  forgotWrapper: {
-    width: '100%',
-    alignItems: 'flex-end',
-    marginBottom: 25,
-  },
-  forgotText: {
-    color: '#888',
-    fontSize: 14,
-  },
-  signInButton: {
+  signUpButton: {
     width: '100%',
     height: 55,
     backgroundColor: '#1DB954',
@@ -137,31 +114,15 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 6,
   },
-  signInText: {
+  signUpText: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
   },
-  socialText: {
-    color: '#1DB954', 
-    marginBottom: 15,
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  socialContainer: {
-    flexDirection: 'row',
-    gap: 30,
-    marginBottom: 30,
-  },
-  socialIcon: {
-    width: 42,
-    height: 42,
-    resizeMode: 'contain',
-  },
-  signupText: {
+  loginText: {
     color: '#888',
   },
-  signupLink: {
+  loginLink: {
     color: '#1DB954',
     fontWeight: 'bold',
   },
