@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Stack, useNavigation } from "expo-router";
 import React from "react";
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 const playlists = [
   { id: "1", title: "DRIFT MIX", cover: require("@/assets/images/playlist1.jpg") },
@@ -22,16 +22,8 @@ export default function PlaylistsScreen() {
           headerStyle: { backgroundColor: "#000" },
           headerTintColor: "#fff",
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("ProfileScreen")} style={{ marginLeft: 15 }}>
-              <Image
-                source={require("@/assets/images/profile_placeholder.png")}
-                style={{ width: 32, height: 32, borderRadius: 16 }}
-              />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")} style={{ marginRight: 15 }}>
-              <Ionicons name="settings-outline" size={24} color="#fff" />
+            <TouchableOpacity onPress={() => navigation.openDrawer()} style={{ marginLeft: 15 }}>
+              <Ionicons name="menu" size={28} color="#fff" />
             </TouchableOpacity>
           ),
         }}
@@ -40,10 +32,13 @@ export default function PlaylistsScreen() {
         data={playlists}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate("PlaylistDetailScreen", { playlist: item })}
+          >
             <Image source={item.cover} style={styles.cover} />
             <Text style={styles.playlistTitle}>{item.title}</Text>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </LinearGradient>

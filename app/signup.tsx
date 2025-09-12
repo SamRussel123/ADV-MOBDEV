@@ -12,33 +12,13 @@ export default function SignupScreen() {
   return (
     <LinearGradient colors={["#1a1a1a", "#000000"]} style={styles.container}>
       <Image source={require("@/assets/images/spotifylogo.webp")} style={styles.logo} />
-
       <Text style={styles.title}>Create Account</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#666"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        placeholderTextColor="#666"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#666"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+      <TextInput style={styles.input} placeholder="Email" placeholderTextColor="#666" value={email} onChangeText={setEmail} />
+      <TextInput style={styles.input} placeholder="Username" placeholderTextColor="#666" value={username} onChangeText={setUsername} />
+      <TextInput style={styles.input} placeholder="Password" placeholderTextColor="#666" secureTextEntry value={password} onChangeText={setPassword} />
 
-      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate("(tabs)")}>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate("PlaylistsScreen")}>
         <Text style={styles.signUpText}>Sign Up</Text>
       </TouchableOpacity>
 

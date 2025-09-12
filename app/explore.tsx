@@ -10,28 +10,13 @@ export default function ExploreScreen() {
 
   return (
     <LinearGradient colors={["#1a1a1a", "#000000"]} style={styles.container}>
-      {/* Logo */}
       <Image source={require("@/assets/images/spotifylogo.webp")} style={styles.logo} />
-
       <Text style={styles.title}>Spotify</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        placeholderTextColor="#666"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#666"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+      <TextInput style={styles.input} placeholder="Username" placeholderTextColor="#666" value={username} onChangeText={setUsername} />
+      <TextInput style={styles.input} placeholder="Password" placeholderTextColor="#666" secureTextEntry value={password} onChangeText={setPassword} />
 
-      <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate("(tabs)")}>
+      <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate("PlaylistsScreen")}>
         <Text style={styles.signInText}>Sign In</Text>
       </TouchableOpacity>
 

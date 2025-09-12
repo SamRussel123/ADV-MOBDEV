@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Stack } from "expo-router";
 import React, { useState } from "react";
 import { StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 
@@ -11,26 +12,29 @@ export default function SettingsScreen() {
 
   return (
     <LinearGradient colors={["#1a1a1a", "#000000"]} style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: "Settings",
+          headerStyle: { backgroundColor: "#000" },
+          headerTintColor: "#fff",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.openDrawer()} style={{ marginLeft: 15 }}>
+              <Ionicons name="menu" size={28} color="#fff" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+
       <Text style={styles.title}>Settings</Text>
 
       <View style={styles.row}>
         <Text style={styles.label}>Notifications</Text>
-        <Switch
-          value={notifications}
-          onValueChange={setNotifications}
-          trackColor={{ false: "#444", true: "#1DB954" }}
-          thumbColor="#fff"
-        />
+        <Switch value={notifications} onValueChange={setNotifications} trackColor={{ false: "#444", true: "#1DB954" }} thumbColor="#fff" />
       </View>
 
       <View style={styles.row}>
         <Text style={styles.label}>Dark Mode</Text>
-        <Switch
-          value={darkMode}
-          onValueChange={setDarkMode}
-          trackColor={{ false: "#444", true: "#1DB954" }}
-          thumbColor="#fff"
-        />
+        <Switch value={darkMode} onValueChange={setDarkMode} trackColor={{ false: "#444", true: "#1DB954" }} thumbColor="#fff" />
       </View>
 
       <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate("explore")}>
