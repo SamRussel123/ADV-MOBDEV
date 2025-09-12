@@ -10,7 +10,6 @@ export default function App() {
   const [initialState, setInitialState] = useState();
   const [isReady, setIsReady] = useState(false);
 
-  // Restore last nav state
   useEffect(() => {
     const restoreState = async () => {
       try {

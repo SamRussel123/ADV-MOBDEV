@@ -1,8 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Stack, useNavigation } from "expo-router";
+import { Stack } from "expo-router";
 import React from "react";
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const playlists = [
   { id: "1", title: "DRIFT MIX", cover: require("@/assets/images/playlist1.jpg") },
@@ -11,8 +13,10 @@ const playlists = [
   { id: "4", title: "KPOP & JPOP", cover: require("@/assets/images/playlist4.jpg") },
 ];
 
+type DrawerNav = DrawerNavigationProp<any>;
+
 export default function PlaylistsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<DrawerNav>();
 
   return (
     <LinearGradient colors={["#1a1a1a", "#000000"]} style={styles.container}>
@@ -33,11 +37,12 @@ export default function PlaylistsScreen() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={styles.card}
-            onPress={() => navigation.navigate("PlaylistDetailScreen", { playlist: item })}
+            onPress={() => navigation.navigate("PlaylistDetailScreen", { playlist: JSON.stringify(item) })}
           >
-            <Image source={item.cover} style={styles.cover} />
-            <Text style={styles.playlistTitle}>{item.title}</Text>
+            <View style={styles.card}>
+              <Image source={item.cover} style={styles.cover} />
+              <Text style={styles.playlistTitle}>{item.title}</Text>
+            </View>
           </TouchableOpacity>
         )}
       />

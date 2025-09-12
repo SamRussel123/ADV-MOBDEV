@@ -24,7 +24,7 @@ export default function SignupScreen() {
 
       <Text style={styles.loginText}>
         Already have an account?{" "}
-        <Text style={styles.loginLink} onPress={() => navigation.navigate("explore")}>
+        <Text style={styles.loginLink} onPress={() => navigation.navigate("home")}>
           Log In
         </Text>
       </Text>

@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function ExploreScreen() {
   const navigation = useNavigation();
@@ -13,19 +13,34 @@ export default function ExploreScreen() {
       <Image source={require("@/assets/images/spotifylogo.webp")} style={styles.logo} />
       <Text style={styles.title}>Spotify</Text>
 
-      <TextInput style={styles.input} placeholder="Username" placeholderTextColor="#666" value={username} onChangeText={setUsername} />
-      <TextInput style={styles.input} placeholder="Password" placeholderTextColor="#666" secureTextEntry value={password} onChangeText={setPassword} />
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        placeholderTextColor="#666"
+        value={username}
+        onChangeText={setUsername}
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        placeholderTextColor="#666"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+        autoCapitalize="none"
+      />
 
-      <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate("PlaylistsScreen")}>
+      <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate("PlaylistsScreen" as never)}>
         <Text style={styles.signInText}>Sign In</Text>
       </TouchableOpacity>
 
-      <Text style={styles.signupText}>
-        Don’t have an account?{" "}
-        <Text style={styles.signupLink} onPress={() => navigation.navigate("signup")}>
-          Sign Up
-        </Text>
-      </Text>
+      <View style={styles.signupRow}>
+        <Text style={styles.signupText}>Don’t have an account?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("signup" as never)}>
+          <Text style={styles.signupLink}> Sign Up</Text>
+        </TouchableOpacity>
+      </View>
     </LinearGradient>
   );
 }
@@ -54,6 +69,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   signInText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
+  signupRow: { flexDirection: "row", marginTop: 8 },
   signupText: { color: "#888" },
   signupLink: { color: "#1DB954", fontWeight: "bold" },
 });
